@@ -11,11 +11,13 @@ const lastOperationScreen = document.getElementById("lastOperationScreen");
 const currentOperationScreen = document.getElementById(
   "currentOperationScreen"
 );
+const pointButton = document.getElementById("pointBtn");
 const equalsButton = document.getElementById("equalsBtn");
 
-equalsButton.addEventListener("click", evaluate);
 clearButton.addEventListener("click", clear);
 deleteButton.addEventListener("click", deleteNumber);
+pointButton.addEventListener("click", appendPoint);
+equalsButton.addEventListener("click", evaluate);
 
 numberButtons.forEach((button) =>
   button.addEventListener("click", () => appendNumber(button.textContent))
@@ -30,6 +32,19 @@ function appendNumber(number) {
     resetScreen();
   }
   currentOperationScreen.textContent += number;
+}
+
+function appendPoint() {
+  if (shouldResetScreen) {
+    resetScreen();
+  }
+  if (currentOperationScreen.textContent === "") {
+    currentOperationScreen.textContent = "0";
+  }
+  if (currentOperationScreen.textContent.includes(".")) {
+    return;
+  }
+  currentOperationScreen.textContent += ".";
 }
 
 function resetScreen() {
