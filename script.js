@@ -70,13 +70,15 @@ function evaluate() {
     return;
   }
   secondOperand = currentOperationScreen.textContent;
-  currentOperationScreen.textContent = operate(
-    currentOperation,
-    firstOperand,
-    secondOperand
+  currentOperationScreen.textContent = roundResult(
+    operate(currentOperation, firstOperand, secondOperand)
   );
   lastOperationScreen.textContent = `${firstOperand} ${currentOperation} ${secondOperand} =`;
   currentOperation = null;
+}
+
+function roundResult(number) {
+  return Math.round(number * 1000) / 1000;
 }
 
 function add(a, b) {
