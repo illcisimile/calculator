@@ -1,4 +1,5 @@
 body {
+  /* Set the height to 100% to align-items to center work. Remove margin so scroll bar does not appear */
   height: 100%;
   margin: 0;
   display: flex;
