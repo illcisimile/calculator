@@ -1,4 +1,6 @@
 body {
+  height: 100%;
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,7 +9,6 @@ body {
 
 .calculator {
   background-color: #1c1c1c;
-  margin-top: 100px;
   width: 400px;
   padding: 20px;
   border: none;
