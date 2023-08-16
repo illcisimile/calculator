@@ -14,25 +14,19 @@ const currentOperationScreen = document.getElementById(
 const pointButton = document.getElementById('pointBtn');
 const equalsButton = document.getElementById('equalsBtn');
 
-clearButton.addEventListener('click', clear);
-deleteButton.addEventListener('click', deleteNumber);
-pointButton.addEventListener('click', appendPoint);
-equalsButton.addEventListener('click', evaluate);
+const clear = () => {
+  lastOperationScreen.textContent = '';
+  currentOperationScreen.textContent = '0';
+  firstOperand = '';
+  secondOperand = '';
+  currentOperation = null;
+};
 
-numberButtons.forEach((button) =>
-  button.addEventListener('click', () => appendNumber(button.textContent))
-);
-
-operatorButtons.forEach((button) =>
-  button.addEventListener('click', () => setOperation(button.textContent))
-);
-
-const appendNumber = (number) => {
-  if (currentOperationScreen.textContent === '0' || shouldResetScreen) {
-    resetScreen();
-  }
-
-  currentOperationScreen.textContent += number;
+const deleteNumber = () => {
+  currentOperationScreen.textContent = currentOperationScreen.textContent.slice(
+    0,
+    -1
+  );
 };
 
 const appendPoint = () => {
@@ -51,36 +45,6 @@ const appendPoint = () => {
   currentOperationScreen.textContent += '.';
 };
 
-const resetScreen = () => {
-  currentOperationScreen.textContent = '';
-  shouldResetScreen = false;
-};
-
-const setOperation = (operator) => {
-  if (currentOperation !== null) {
-    evaluate();
-  }
-
-  firstOperand = currentOperationScreen.textContent;
-  currentOperation = operator;
-  lastOperationScreen.textContent = `${firstOperand} ${currentOperation}`;
-  shouldResetScreen = true;
-};
-
-const clear = () => {
-  lastOperationScreen.textContent = '';
-  currentOperationScreen.textContent = '0';
-  firstOperand = '';
-  secondOperand = '';
-  currentOperation = null;
-};
-
-const deleteNumber = () => {
-  currentOperationScreen.textContent = currentOperationScreen.textContent
-    .toString()
-    .slice(0, -1);
-};
-
 const evaluate = () => {
   if (currentOperation === null || shouldResetScreen) {
     return;
@@ -97,6 +61,30 @@ const evaluate = () => {
   );
   lastOperationScreen.textContent = `${firstOperand} ${currentOperation} ${secondOperand} =`;
   currentOperation = null;
+};
+
+const appendNumber = (number) => {
+  if (currentOperationScreen.textContent === '0' || shouldResetScreen) {
+    resetScreen();
+  }
+
+  currentOperationScreen.textContent += number;
+};
+
+const resetScreen = () => {
+  currentOperationScreen.textContent = '';
+  shouldResetScreen = false;
+};
+
+const setOperation = (operator) => {
+  if (currentOperation !== null) {
+    evaluate();
+  }
+
+  firstOperand = currentOperationScreen.textContent;
+  currentOperation = operator;
+  lastOperationScreen.textContent = `${firstOperand} ${currentOperation}`;
+  shouldResetScreen = true;
 };
 
 const roundResult = (number) => {
@@ -134,3 +122,16 @@ const operate = (operator, a, b) => {
       return divide(a, b);
   }
 };
+
+clearButton.addEventListener('click', clear);
+deleteButton.addEventListener('click', deleteNumber);
+pointButton.addEventListener('click', appendPoint);
+equalsButton.addEventListener('click', evaluate);
+
+numberButtons.forEach((button) =>
+  button.addEventListener('click', () => appendNumber(button.textContent))
+);
+
+operatorButtons.forEach((button) =>
+  button.addEventListener('click', () => setOperation(button.textContent))
+);
