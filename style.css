@@ -18,7 +18,7 @@ body {
 
 .calculator {
   background-color: #1c1c1c;
-  width: 400px;
+  width: 360px;
   padding: 20px;
   border-radius: 1rem;
 }
@@ -67,4 +67,10 @@ body {
 .btn.operator {
   color: #f5f5f5;
   background-color: #ff9500;
+}
+
+@media screen and (min-width: 640px) {
+  .calculator {
+    width: 400px;
+  }
 }
